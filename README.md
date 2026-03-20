@@ -55,4 +55,4 @@ Documentação técnica do projeto.
 Este projeto está sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
-Desenvolvido por **Ricardo Lopes Tomaz** - Acadêmico de Computação/Sistemas (UFT).
+Desenvolvido por **Anna Beatriz Moura de Oliveira, Grazyelle Nayara Bento dos Santos, Pedro Ryan Oliveira de Almeida e Ricardo Lopes Tomaz** - Acadêmico de Computação/Sistemas (UFT).
