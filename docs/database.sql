@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS filme (
 );
 
 -- 4. Tabela de Genero
-CREATE' TABLE IF NOT EXISTS genero (
+CREATE TABLE IF NOT EXISTS genero (
     id_genero INT AUTO_INCREMENT PRIMARY KEY,
     nome_genero VARCHAR(50) NOT NULL
 );
