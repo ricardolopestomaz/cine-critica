@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - Cine-Crítica</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <style>
+        body { background-color: var(--primary-color); color: var(--text-light); font-family: var(--font-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .form-card { background-color: #2a2a2a; padding: 2rem; border-radius: var(--border-radius-lg); border: 1px solid var(--secondary-color); width: 100%; max-width: 400px; }
+        h2 { color: var(--secondary-color); text-align: center; margin-bottom: 1.5rem; }
+        .input-group { margin-bottom: 1.2rem; }
+        label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        input { width: 100%; padding: 0.8rem; border-radius: var(--border-radius-sm); border: 1px solid #444; background: #1a1a1a; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 1rem; background-color: var(--secondary-color); border: none; border-radius: var(--border-radius-sm); font-weight: bold; cursor: pointer; margin-top: 1rem; }
+        .alert { padding: 10px; border-radius: 5px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem; }
+        .error { background: #ff4d4d; color: white; }
+        .success { background: var(--success-color); color: white; }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <h2>Criar Conta</h2>
+
+        <?php if(isset($_GET['erro'])): ?>
+            <div class="alert error">
+                <?php 
+                    if($_GET['erro'] == 'email_duplicado') echo "Este e-mail já existe!";
+                    elseif($_GET['erro'] == 'dados_invalidos') echo "Preencha todos os campos corretamente (Senha mín. 6 caracteres).";
+                    else echo "Erro no sistema. Tente mais tarde.";
+                ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if(isset($_GET['sucesso'])): ?>
+            <div class="alert success">Usuário cadastrado com sucesso!</div>
+        <?php endif; ?>
+
+        <form action="../modules/cadastro/salvar_usuario.php" method="POST">
+            <div class="input-group">
+                <label>Nome Completo</label>
+                <input type="text" name="nome_usuario" required>
+            </div>
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="email" name="email_usuario" required>
+            </div>
+            <div class="input-group">
+                <label>Senha (mín. 6 caracteres)</label>
+                <input type="password" name="senha_usuario" required minlength="6">
+            </div>
+            <button type="submit">CADASTRAR</button>
+        </form>
+    </div>
+</body>
+</html>
