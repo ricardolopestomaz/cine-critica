@@ -1,4 +1,16 @@
-# 🎬 Cine-Crítica
+# Universidade Federal do Tocantins (UFT)
+
+**👥 Equipe**
+* **Anna Beatriz Moura de Oliveira**
+* **Grazyelle Nayara Bento dos Santos**
+* **Pedro Ryan Oliveira de Almeida**
+* **Ricardo Lopes Tomaz**
+
+**Professor:** Edeilson Milhomem da Silva  
+**Disciplina:** Engenharia de Software  
+**Semestre:** 2026.1
+
+## 🎬 Cine-Crítica
 
 Sistema web para gerenciamento, consulta e avaliação de acervo cinematográfico. Este projeto foi desenvolvido como requisito prático para a disciplina de **Engenharia de Software** na Universidade Federal do Tocantins (UFT).
 
@@ -25,6 +37,7 @@ Módulos que segmentam as funcionalidades principais do sistema:
 - `cadastro/`: Lógica de inserção de novos títulos e processamento de imagens.
 - `busca/`: Algoritmos de filtragem por nome, ano e categorias.
 - `avaliacoes/`: Sistema de notas e processamento de comentários dos usuários.
+- `avaliacoes/`: Sistema que mostra os detalhes dos filmes.
 
 ### 4. `/config`
 Configurações críticas e sensíveis do ambiente.
@@ -55,4 +68,3 @@ Documentação técnica do projeto.
 Este projeto está sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
-Desenvolvido por **Anna Beatriz Moura de Oliveira, Grazyelle Nayara Bento dos Santos, Pedro Ryan Oliveira de Almeida e Ricardo Lopes Tomaz** - Acadêmico de Computação/Sistemas (UFT).
