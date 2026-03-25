@@ -1,92 +1,70 @@
 <?php
-<<<<<<< HEAD
-require '../config/db_connect.php';
-
-$id_filme = isset($_GET['id_filme']) ? (int) $_GET['id_filme'] : 0;
-=======
 session_start();
-require_once '../../config/db_connect.php';
+require '../../config/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Método inválido.");
 }
 
-/* Verifica se o usuário está logado */
-if (!isset($_SESSION['id_usuario'])) {
-    die("Usuário não está logado.");
-}
+$id_usuario = 1; // usuário fixo para teste
 
-$id_usuario = (int) $_SESSION['id_usuario'];
 $id_filme   = isset($_POST['id_filme']) ? (int) $_POST['id_filme'] : 0;
 $nota       = isset($_POST['nota']) ? (int) $_POST['nota'] : -1;
 $critica    = isset($_POST['critica']) ? trim($_POST['critica']) : '';
->>>>>>> 9006e6244a20fa4598be2d1e8ae1694c12b87cc7
 
 if ($id_filme <= 0) {
     die("Filme inválido.");
 }
 
-<<<<<<< HEAD
-/* Buscar dados do filme */
-$sql_filme = "SELECT titulo_filme, resumo FROM filme WHERE id_filme = ?";
-$stmt_filme = $conexao->prepare($sql_filme);
-$stmt_filme->bind_param("i", $id_filme);
-$stmt_filme->execute();
-$result_filme = $stmt_filme->get_result();
-
-if ($result_filme->num_rows === 0) {
-    die("Filme não encontrado.");
-}
-
-$filme = $result_filme->fetch_assoc();
-
-/* Buscar média e total de avaliações */
-$sql_media = "SELECT AVG(nota) AS media, COUNT(*) AS total 
-              FROM avaliacao 
-              WHERE id_filme = ?";
-$stmt_media = $conexao->prepare($sql_media);
-$stmt_media->bind_param("i", $id_filme);
-$stmt_media->execute();
-$result_media = $stmt_media->get_result();
-$dados_media = $result_media->fetch_assoc();
-
-$media = $dados_media['media'] ? number_format($dados_media['media'], 1) : "0.0";
-$total = $dados_media['total'];
-
-/* Buscar avaliações com nome do usuário */
-$sql_avaliacoes = "SELECT u.nome_usuario, a.nota, a.critica, a.data_avaliacao
-                   FROM avaliacao a
-                   INNER JOIN usuario u ON a.id_usuario = u.id_usuario
-                   WHERE a.id_filme = ?
-                   ORDER BY a.data_avaliacao DESC";
-$stmt_avaliacoes = $conexao->prepare($sql_avaliacoes);
-$stmt_avaliacoes->bind_param("i", $id_filme);
-$stmt_avaliacoes->execute();
-$result_avaliacoes = $stmt_avaliacoes->get_result();
-?>
-
-=======
 if ($nota < 0 || $nota > 5) {
     die("Nota inválida.");
 }
 
-$sql = "INSERT INTO avaliacao (id_usuario, id_filme, nota, critica, data_avaliacao)
-        VALUES (?, ?, ?, ?, NOW())";
+/* Verifica se o usuário já avaliou esse filme */
+$sql_check = "SELECT id_avaliacao FROM avaliacao WHERE id_usuario = ? AND id_filme = ?";
+$stmt_check = $conexao->prepare($sql_check);
 
-$stmt = mysqli_prepare($conexao, $sql);
-
-if (!$stmt) {
-    die("Erro ao preparar a query: " . mysqli_error($conexao));
+if (!$stmt_check) {
+    die("Erro ao preparar verificação: " . $conexao->error);
 }
 
-mysqli_stmt_bind_param($stmt, "iiis", $id_usuario, $id_filme, $nota, $critica);
+$stmt_check->bind_param("ii", $id_usuario, $id_filme);
+$stmt_check->execute();
+$result_check = $stmt_check->get_result();
 
-if (mysqli_stmt_execute($stmt)) {
-    mysqli_stmt_close($stmt);
-    header("Location: avaliar_filme.php?id_filme=" . $id_filme);
-    exit;
+if ($result_check->num_rows > 0) {
+    /* Atualiza avaliação existente */
+    $sql_update = "UPDATE avaliacao
+                   SET nota = ?, critica = ?, data_avaliacao = NOW()
+                   WHERE id_usuario = ? AND id_filme = ?";
+    $stmt_update = $conexao->prepare($sql_update);
+
+    if (!$stmt_update) {
+        die("Erro ao preparar atualização: " . $conexao->error);
+    }
+
+    $stmt_update->bind_param("isii", $nota, $critica, $id_usuario, $id_filme);
+
+    if (!$stmt_update->execute()) {
+        die("Erro ao atualizar avaliação: " . $stmt_update->error);
+    }
 } else {
-    die("Erro ao salvar avaliação: " . mysqli_stmt_error($stmt));
+    /* Insere nova avaliação */
+    $sql_insert = "INSERT INTO avaliacao (id_usuario, id_filme, nota, critica)
+                   VALUES (?, ?, ?, ?)";
+    $stmt_insert = $conexao->prepare($sql_insert);
+
+    if (!$stmt_insert) {
+        die("Erro ao preparar inserção: " . $conexao->error);
+    }
+
+    $stmt_insert->bind_param("iiis", $id_usuario, $id_filme, $nota, $critica);
+
+    if (!$stmt_insert->execute()) {
+        die("Erro ao inserir avaliação: " . $stmt_insert->error);
+    }
 }
+
+header("Location: ../../public/avaliacao.php?id_filme=" . $id_filme);
+exit;
 ?>
->>>>>>> 9006e6244a20fa4598be2d1e8ae1694c12b87cc7
