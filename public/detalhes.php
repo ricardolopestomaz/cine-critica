@@ -137,4 +137,10 @@ require_once "../modules/detalhes/get_filme_detalhes.php";
 
 </body>
 
+<script>
+    function abrirModalAvaliacao() {
+        window.location.href = 'avaliacao.php';
+    }
+</script>
+
 </html>
