@@ -4,6 +4,8 @@ require_once '../config/db_connect.php';
 // ===============================================
 // CONSULTA SQL PARA BUSCAR TODOS OS FILMES
 // ===============================================
+$termo = isset($_GET['busca']) ? mysqli_real_escape_string($conexao, $_GET['busca']) : '';
+
 $sql_filmes = "
     SELECT 
         f.id_filme,
@@ -17,6 +19,13 @@ $sql_filmes = "
     FROM filme f
     LEFT JOIN filme_genero fg ON f.id_filme = fg.id_filme
     LEFT JOIN genero g ON fg.id_genero = g.id_genero
+";
+
+if (!empty($termo)) {
+    $sql_filmes .= " WHERE f.titulo_filme LIKE '%$termo%' OR f.resumo LIKE '%$termo%'";
+}
+
+$sql_filmes .= "
     GROUP BY f.id_filme
     ORDER BY f.data_cadastro DESC
 ";
