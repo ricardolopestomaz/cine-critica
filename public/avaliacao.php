@@ -8,7 +8,7 @@ if ($id_filme <= 0) {
 }
 
 /* Buscar dados do filme */
-$sql_filme = "SELECT titulo_filme, resumo FROM filme WHERE id_filme = ?";
+$sql_filme = "SELECT titulo_filme, resumo, url_poster FROM filme WHERE id_filme = ?";
 $stmt_filme = $conexao->prepare($sql_filme);
 
 if (!$stmt_filme) {
@@ -66,51 +66,95 @@ $result_avaliacoes = $stmt_avaliacoes->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliações</title>
+    <link rel="stylesheet" href="css/avaliacao.css">
 </head>
 <body>
-    <h1><?php echo htmlspecialchars($filme['titulo_filme']); ?></h1>
-    <p><?php echo htmlspecialchars($filme['resumo'] ?? ''); ?></p>
+    <div class="container-avaliacao">
 
-    <h2>Resumo das avaliações</h2>
-    <p><strong>Média:</strong> <?php echo $media; ?></p>
-    <p><strong>Total de avaliações:</strong> <?php echo $total; ?></p>
+        <div class="topo-avaliacao">
+            <h1><?php echo htmlspecialchars($filme['titulo_filme']); ?></h1>
 
-    <h2>Enviar avaliação</h2>
-    <form action="../modules/avaliacoes/salvar_avaliacao.php" method="POST">
-        <input type="hidden" name="id_filme" value="<?php echo $id_filme; ?>">
+            <?php if (!empty($filme['url_poster'])): ?>
+                <div class="poster-filme">
+                    <img src="<?php echo htmlspecialchars($filme['url_poster']); ?>" alt="Poster do filme">
+                </div>
+            <?php endif; ?>
 
-        <label for="nota">Nota:</label><br>
-        <select name="nota" id="nota" required>
-            <option value="">Selecione</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <br><br>
+            <p class="resumo-filme">
+                <?php echo htmlspecialchars($filme['resumo'] ?? ''); ?>
+            </p>
+        </div>
 
-        <label for="critica">Crítica:</label><br>
-        <textarea name="critica" id="critica" rows="5" cols="50"></textarea>
-        <br><br>
+        <div class="resumo-box">
+            <h2>Resumo das avaliações</h2>
+            <p><strong>Média:</strong> <?php echo $media; ?></p>
+            <p><strong>Total de avaliações:</strong> <?php echo $total; ?></p>
+        </div>
 
-        <button type="submit">Enviar avaliação</button>
-    </form>
+        <div class="form-avaliacao">
+            <h2>Enviar avaliação</h2>
 
-    <h2>Avaliações dos usuários</h2>
+            <form action="../modules/avaliacoes/salvar_avaliacao.php" method="POST">
+                <input type="hidden" name="id_filme" value="<?php echo $id_filme; ?>">
 
-    <?php if ($result_avaliacoes->num_rows > 0): ?>
-        <?php while ($avaliacao = $result_avaliacoes->fetch_assoc()): ?>
-            <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
-                <strong><?php echo htmlspecialchars($avaliacao['nome_usuario']); ?></strong>
-                - Nota: <?php echo (int) $avaliacao['nota']; ?><br>
-                <small><?php echo htmlspecialchars($avaliacao['data_avaliacao']); ?></small>
-                <p><?php echo nl2br(htmlspecialchars($avaliacao['critica'] ?? '')); ?></p>
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <p>Ainda não há avaliações para este filme.</p>
-    <?php endif; ?>
+                <div class="form-group">
+                    <label>Sua nota</label>
+
+                    <div class="estrelas">
+                        <input type="radio" name="nota" id="estrela5" value="5" required>
+                        <label for="estrela5">★</label>
+
+                        <input type="radio" name="nota" id="estrela4" value="4">
+                        <label for="estrela4">★</label>
+
+                        <input type="radio" name="nota" id="estrela3" value="3">
+                        <label for="estrela3">★</label>
+
+                        <input type="radio" name="nota" id="estrela2" value="2">
+                        <label for="estrela2">★</label>
+
+                        <input type="radio" name="nota" id="estrela1" value="1">
+                        <label for="estrela1">★</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="critica">Crítica</label>
+                    <textarea name="critica" id="critica" placeholder="Escreva sua opinião sobre o filme"></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar">Enviar avaliação</button>
+            </form>
+        </div>
+
+        <div class="lista-avaliacoes">
+            <h2>Avaliações dos usuários</h2>
+
+            <?php if ($result_avaliacoes->num_rows > 0): ?>
+                <?php while ($avaliacao = $result_avaliacoes->fetch_assoc()): ?>
+                    <div class="card-avaliacao">
+                        <div class="usuario">
+                            <?php echo htmlspecialchars($avaliacao['nome_usuario']); ?>
+                        </div>
+
+                        <div class="nota">
+                            Nota: <?php echo (int) $avaliacao['nota']; ?>
+                        </div>
+
+                        <small class="data">
+                            <?php echo htmlspecialchars($avaliacao['data_avaliacao']); ?>
+                        </small>
+
+                        <p class="critica">
+                            <?php echo nl2br(htmlspecialchars($avaliacao['critica'] ?? '')); ?>
+                        </p>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p class="sem-avaliacoes">Ainda não há avaliações para este filme.</p>
+            <?php endif; ?>
+        </div>
+
+    </div>
 </body>
 </html>
