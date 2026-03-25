@@ -1,0 +1,271 @@
+/* =========================================
+   1. RESET E BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #f5f5f5;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. CONTAINER PRINCIPAL
+   ========================================= */
+.container-avaliacao {
+    max-width: 1000px;
+    margin: 40px auto;
+    width: 90%;
+    background-color: rgba(18, 18, 18, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* =========================================
+   3. CABEÇALHO DA PÁGINA
+   ========================================= */
+.topo-avaliacao {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.topo-avaliacao h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.resumo-filme {
+    font-size: 1rem;
+    color: #d1d1d1;
+    margin-top: 10px;
+}
+
+/* =========================================
+   4. RESUMO DAS AVALIAÇÕES
+   ========================================= */
+.resumo-box {
+    background: #121212;
+    border-left: 4px solid #f5c518;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.resumo-box h2 {
+    color: #f5c518;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.resumo-box p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.resumo-box strong {
+    color: #ffffff;
+}
+
+/* =========================================
+   5. FORMULÁRIO
+   ========================================= */
+.form-avaliacao {
+    background: #111;
+    border: 1px solid #2c2c2c;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 35px;
+}
+
+.form-avaliacao h2 {
+    font-size: 1.4rem;
+    color: #5799ef;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #f5f5f5;
+}
+
+.form-avaliacao textarea {
+    width: 100%;
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-avaliacao textarea:focus {
+    outline: none;
+    border-color: #5799ef;
+    box-shadow: 0 0 0 3px rgba(87, 153, 239, 0.15);
+}
+
+.form-avaliacao textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.btn-enviar {
+    background-color: #f5c518;
+    color: #000;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.btn-enviar:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+}
+
+/* =========================================
+   6. LISTA DE AVALIAÇÕES
+   ========================================= */
+.lista-avaliacoes h2 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.card-avaliacao {
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    border-left: 4px solid #5799ef;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 18px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.card-avaliacao:hover {
+    transform: translateY(-2px);
+    border-left-color: #f5c518;
+}
+
+.card-avaliacao .usuario {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.card-avaliacao .nota {
+    color: #f5c518;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.card-avaliacao .data {
+    display: block;
+    font-size: 0.9rem;
+    color: #aaaaaa;
+    margin: 8px 0 12px;
+}
+
+.card-avaliacao .critica {
+    color: #dddddd;
+    white-space: pre-line;
+}
+
+/* =========================================
+   7. MENSAGEM SEM AVALIAÇÕES
+   ========================================= */
+.sem-avaliacoes {
+    background: #111;
+    border: 1px dashed #444;
+    border-radius: 8px;
+    padding: 18px;
+    color: #bbbbbb;
+    text-align: center;
+}
+
+/* =========================================
+   8. SISTEMA DE ESTRELAS
+   ========================================= */
+.estrelas {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.estrelas input {
+    display: none;
+}
+
+.estrelas label {
+    font-size: 2rem;
+    color: #444;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.estrelas label:hover,
+.estrelas label:hover ~ label {
+    color: #f5c518;
+    transform: scale(1.05);
+}
+
+.estrelas input:checked ~ label {
+    color: #f5c518;
+}
+
+/* =========================================
+   9. RESPONSIVIDADE
+   ========================================= */
+@media (max-width: 768px) {
+    .container-avaliacao {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .topo-avaliacao h1 {
+        font-size: 1.8rem;
+    }
+
+    .resumo-box,
+    .form-avaliacao,
+    .card-avaliacao {
+        padding: 16px;
+    }
+
+    .btn-enviar {
+        width: 100%;
+    }
+}
+
+.poster-filme {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.poster-filme img {
+    width: 220px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
