@@ -28,9 +28,6 @@ Ponto de entrada da aplicação. É a pasta que deve ser servida pelo Apache.
 - `uploads/`: Armazenamento local das capas dos filmes cadastrados.
 
 ### 2. `/includes`
-Componentes reutilizáveis para evitar repetição de código (DRY - Don't Repeat Yourself).
-- `header.php`: Barra de navegação, busca e menu global.
-- `footer.php`: Rodapé e scripts globais.
 
 ### 3. `/modules`
 Módulos que segmentam as funcionalidades principais do sistema:
@@ -68,3 +65,6 @@ Documentação técnica do projeto.
 Este projeto está sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
+## 🎥 Vídeo de Apresentação
+
+[▶️] https://drive.google.com/file/d/1YQ3GkqIS9WC21ZjWO9j2WI4gqX2aLb0e/view?usp=sharing
