@@ -1,0 +1,28 @@
+:root {
+    /* --- PALETA DE CORES (IDENTIDADE VISUAL) --- */
+    --primary-color: #1a1a1a;      /* Fundo Principal */
+    --secondary-color: #f5c518;    /* Amarelo Ouro */
+    --accent-color: #d12f2f;       /* Vermelho para Gêneros/Badges */
+    
+    /* --- CORES DE TEXTO E FUNDO --- */
+    --text-light: #ffffff;         /* Texto sobre fundo escuro */
+    --text-muted: #bbbbbb;        /* Texto secundário (sinopses) */
+    --bg-card: #2a2a2a;           /* Fundo dos Cards de Filmes */
+    --border-color: #333333;      /* Bordas sutis no tema escuro */
+
+    /* --- CORES DE STATUS (SISTEMA) --- */
+    --success-color: #00873c;      /* Feedback de Cadastro */
+    --warning-color: #ff9800;      /* Alertas */
+    --error-color: #cf6679;        /* Erros de validação */
+
+    /* --- TIPOGRAFIA (ESTILIZAÇÃO) --- */
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-size-base: 16px;
+    --font-size-title: 2rem;       /* 32px adaptável */
+    --line-height: 1.5;
+
+    /* --- LAYOUT E BORDAS --- */
+    --border-radius-sm: 4px;       /* Cards e Botões */
+    --border-radius-lg: 12px;      /* Dropdowns e Modais */
+    --transition-speed: 0.3s;      /* Velocidade do Hover */
+}
