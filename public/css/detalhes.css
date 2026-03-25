@@ -187,3 +187,41 @@ hr { border: 0; border-top: 1px solid #333; margin: 30px 0; }
     /* Cria um degradê para o texto da crítica não brigar com a imagem */
     background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 100%);
 }
+
+/* =========================================
+   5. RESPONSIVIDADE (MOBILE)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Faz o container empilhar os itens verticalmente */
+    .container-visual {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Esconde o poster em telas pequenas */
+    .poster-side {
+        display: none;
+    }
+
+    /* Garante que o vídeo ocupe toda a largura disponível */
+    .video-side {
+        width: 100%;
+    }
+
+    /* Ajusta a altura do iframe para não ficar cortado no celular */
+    .video-side iframe {
+        min-height: 250px;
+        height: auto;
+    }
+
+    /* Ajusta o Header para não quebrar o layout */
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .rating-header {
+        align-items: center;
+    }
+}
